@@ -1,0 +1,10 @@
+C:\Programming\AppGreat\Ecommerce\WebApplication1\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Programming\AppGreat\Ecommerce\WebApplication1\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Programming\AppGreat\Ecommerce\WebApplication1\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Programming\AppGreat\Ecommerce\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.exe
+C:\Programming\AppGreat\Ecommerce\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.csprojAssemblyReference.cache
+C:\Programming\AppGreat\Ecommerce\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.AssemblyInfoInputs.cache
+C:\Programming\AppGreat\Ecommerce\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.AssemblyInfo.cs
+C:\Programming\AppGreat\Ecommerce\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorTargetAssemblyInfo.cache
+C:\Programming\AppGreat\Ecommerce\WebApplication1\obj\Debug\netcoreapp3.1\staticwebassets\WebApplication1.StaticWebAssets.Manifest.cache
+C:\Programming\AppGreat\Ecommerce\WebApplication1\obj\Debug\netcoreapp3.1\staticwebassets\WebApplication1.StaticWebAssets.xml
