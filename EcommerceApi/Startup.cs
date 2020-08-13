@@ -27,7 +27,7 @@ namespace Eccomerce
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<EccomerceDbContext>(
+            services.AddDbContext<EccomerceContext>(
                    options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
             var jwtSection = configuration.GetSection("JwtSettings");
@@ -44,7 +44,7 @@ namespace Eccomerce
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<EccomerceDbContext>();
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<EccomerceContext>();
 
                 if (env.IsDevelopment())
                 {

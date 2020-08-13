@@ -19,10 +19,10 @@ namespace Eccomerce.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly EccomerceDbContext context;
+        private readonly EccomerceContext context;
         private readonly JwtSettings jwtsettings;
 
-        public UsersController(EccomerceDbContext context, IOptions<JwtSettings> jwtsettings)
+        public UsersController(EccomerceContext context, IOptions<JwtSettings> jwtsettings)
         {
             this.context = context;
             this.jwtsettings = jwtsettings.Value;
@@ -30,14 +30,14 @@ namespace Eccomerce.Controllers
 
         // GET: api/Users
         [HttpGet("GetUsers")]
-        public async Task<ActionResult<IEnumerable<UserModel>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
         {
             return await context.Users.ToListAsync();
         }
 
         // GET: api/Users/5
         [HttpGet("GetUser/{id}")]
-        public async Task<ActionResult<UserModel>> GetUser(int id)
+        public async Task<ActionResult<Users>> GetUser(int id)
         {
             var user = await context.Users.FindAsync(id);
 
@@ -51,7 +51,7 @@ namespace Eccomerce.Controllers
 
         // GET: api/Users/5
         [HttpGet("GetUserDetails/{id}")]
-        public async Task<ActionResult<UserModel>> GetUserDetails(int id)
+        public async Task<ActionResult<Users>> GetUserDetails(int id)
         {
             var user = await context.Users.Where(u => u.Id == id)
                                             .FirstOrDefaultAsync();
@@ -66,7 +66,7 @@ namespace Eccomerce.Controllers
 
         // POST: api/Users
         [HttpPost("Login")]
-        public async Task<ActionResult<UserWithToken>> Login([FromBody] UserModel user)
+        public async Task<ActionResult<UserWithToken>> Login([FromBody] Users user)
         {
             user = await context.Users.Where(x=>x.Password == user.Password).FirstOrDefaultAsync();
 
@@ -74,7 +74,7 @@ namespace Eccomerce.Controllers
 
             if (user != null)
             {
-                RefreshToken refreshToken = GenerateRefreshToken();
+                RefreshTokens refreshToken = GenerateRefreshToken();
                 user.RefreshTokens.Add(refreshToken);
                 await context.SaveChangesAsync();
 
@@ -94,7 +94,7 @@ namespace Eccomerce.Controllers
 
         // POST: api/Users
         [HttpPost("RegisterUser")]
-        public async Task<ActionResult<UserWithToken>> RegisterUser([FromBody] UserModel user)
+        public async Task<ActionResult<UserWithToken>> RegisterUser([FromBody] Users user)
         {
             context.Users.Add(user);
             await context.SaveChangesAsync();
@@ -106,7 +106,7 @@ namespace Eccomerce.Controllers
 
             if (user != null)
             {
-                RefreshToken refreshToken = GenerateRefreshToken();
+                RefreshTokens refreshToken = GenerateRefreshToken();
                 user.RefreshTokens.Add(refreshToken);
                 await context.SaveChangesAsync();
 
@@ -128,7 +128,7 @@ namespace Eccomerce.Controllers
         [HttpPost("RefreshToken")]
         public async Task<ActionResult<UserWithToken>> RefreshToken([FromBody] RefreshRequest refreshRequest)
         {
-            UserModel user = await GetUserFromAccessToken(refreshRequest.AccessToken);
+            Users user = await GetUserFromAccessToken(refreshRequest.AccessToken);
 
             if (user != null && ValidateRefreshToken(user, refreshRequest.RefreshToken))
             {
@@ -143,9 +143,9 @@ namespace Eccomerce.Controllers
 
         // GET: api/Users
         [HttpPost("GetUserByAccessToken")]
-        public async Task<ActionResult<UserModel>> GetUserByAccessToken([FromBody] string accessToken)
+        public async Task<ActionResult<Users>> GetUserByAccessToken([FromBody] string accessToken)
         {
-            UserModel user = await GetUserFromAccessToken(accessToken);
+            Users user = await GetUserFromAccessToken(accessToken);
 
             if (user != null)
             {
@@ -155,10 +155,10 @@ namespace Eccomerce.Controllers
             return null;
         }
 
-        private bool ValidateRefreshToken(UserModel user, string refreshToken)
+        private bool ValidateRefreshToken(Users user, string refreshToken)
         {
 
-            RefreshToken refreshTokenUser = context.RefreshTokens.Where(rt => rt.Token == refreshToken)
+            RefreshTokens refreshTokenUser = context.RefreshTokens.Where(rt => rt.Token == refreshToken)
                                                 .OrderByDescending(rt => rt.ExpiryDate)
                                                 .FirstOrDefault();
 
@@ -171,7 +171,7 @@ namespace Eccomerce.Controllers
             return false;
         }
 
-        private async Task<UserModel> GetUserFromAccessToken(string accessToken)
+        private async Task<Users> GetUserFromAccessToken(string accessToken)
         {
             try
             {
@@ -200,15 +200,15 @@ namespace Eccomerce.Controllers
             }
             catch (Exception)
             {
-                return new UserModel();
+                return new Users();
             }
 
-            return new UserModel();
+            return new Users();
         }
 
-        private RefreshToken GenerateRefreshToken()
+        private RefreshTokens GenerateRefreshToken()
         {
-            RefreshToken refreshToken = new RefreshToken();
+            RefreshTokens refreshToken = new RefreshTokens();
 
             var randomNumber = new byte[32];
             using (var rng = RandomNumberGenerator.Create())
@@ -273,7 +273,7 @@ namespace Eccomerce.Controllers
 
         // POST: api/Users
         [HttpPost("CreateUser")]
-        public async Task<ActionResult<UserModel>> PostUser(UserModel user)
+        public async Task<ActionResult<Users>> PostUser(Users user)
         {
             context.Users.Add(user);
             await context.SaveChangesAsync();
@@ -283,7 +283,7 @@ namespace Eccomerce.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("DeleteUser/{id}")]
-        public async Task<ActionResult<UserModel>> DeleteUser(int id)
+        public async Task<ActionResult<Users>> DeleteUser(int id)
         {
             var user = await context.Users.FindAsync(id);
             if (user == null)

@@ -12,23 +12,23 @@ namespace Eccomerce.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly EccomerceDbContext context;
+        private readonly EccomerceContext context;
 
-        public ProductsController(EccomerceDbContext context)
+        public ProductsController(EccomerceContext context)
         {
             this.context = context;
         }
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Products>>> GetProducts()
         {
             return await context.Products.ToListAsync();
         }
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProducts(int id)
+        public async Task<ActionResult<Products>> GetProducts(int id)
         {
             var products = await context.Products.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace Eccomerce.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducts(int id, Product products)
+        public async Task<IActionResult> PutProducts(int id, Products products)
         {
             if (id != products.Id)
             {
@@ -72,7 +72,7 @@ namespace Eccomerce.Controllers
             return NoContent();
         }
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProducts(Product products)
+        public async Task<ActionResult<Products>> PostProducts(Products products)
         {
             context.Products.Add(products);
             await context.SaveChangesAsync();
@@ -82,7 +82,7 @@ namespace Eccomerce.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Product>> DeleteProducts(int id)
+        public async Task<ActionResult<Products>> DeleteProducts(int id)
         {
             var products = await context.Products.FindAsync(id);
             if (products == null)

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Programming\\AppGreat\\Ecommerce\\WebApplication1\\Eccomerce.csproj": {}
+    "C:\\Programming\\AppGreat\\Ecommerce\\EcommerceApi\\Eccomerce.csproj": {}
   },
   "projects": {
-    "C:\\Programming\\AppGreat\\Ecommerce\\WebApplication1\\Eccomerce.csproj": {
+    "C:\\Programming\\AppGreat\\Ecommerce\\EcommerceApi\\Eccomerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Programming\\AppGreat\\Ecommerce\\WebApplication1\\Eccomerce.csproj",
+        "projectUniqueName": "C:\\Programming\\AppGreat\\Ecommerce\\EcommerceApi\\Eccomerce.csproj",
         "projectName": "Eccomerce",
-        "projectPath": "C:\\Programming\\AppGreat\\Ecommerce\\WebApplication1\\Eccomerce.csproj",
+        "projectPath": "C:\\Programming\\AppGreat\\Ecommerce\\EcommerceApi\\Eccomerce.csproj",
         "packagesPath": "C:\\Users\\Doxir\\.nuget\\packages\\",
-        "outputPath": "C:\\Programming\\AppGreat\\Ecommerce\\WebApplication1\\obj\\",
+        "outputPath": "C:\\Programming\\AppGreat\\Ecommerce\\EcommerceApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
